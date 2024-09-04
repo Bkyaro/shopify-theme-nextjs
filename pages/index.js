@@ -1,8 +1,9 @@
 import { getProductsInCollection } from "../lib/shopify";
+import ProductList from "../components/ProductList";
 
 export default function Home({ products }) {
 	console.log("products", products);
-	return <div className="text-2xl">zup</div>;
+	return <ProductList products={products} />;
 }
 
 export async function getStaticProps() {
