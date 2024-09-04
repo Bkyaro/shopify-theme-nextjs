@@ -2,7 +2,6 @@ import Image from "next/image";
 import ProductForm from "./ProductForm";
 
 export default function ProductPageContent({ product }) {
-	console.log("product", product);
 	return (
 		<div className="w-full flex flex-col justify-center items-center space-y-8 md:flex-row md:items-start md:space-y-0 md:space-x-4 lg:space-x-8 max-w-6xl  max-auto">
 			<div className="w-full max-w-md border bg-white rounded-2xl overflow-hidden shadow-lg md:w-1/2">
@@ -15,7 +14,7 @@ export default function ProductPageContent({ product }) {
 					/>
 				</div>
 			</div>
-			<ProductForm />
+			<ProductForm product={product} />
 		</div>
 	);
 }
