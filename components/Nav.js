@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import Link from "next/link";
 import { CartContext } from "@/context/shopContext";
 import { useContext } from "react";
+import MiniCart from "./MiniCart";
 
 function Nav() {
 	const { cart, cartOpen, setCartOpen } = useContext(CartContext);
@@ -19,9 +21,16 @@ function Nav() {
 						</span>
 					</a>
 				</Link>
-				<a className="text-md font-bold cursor-pointer">
+				<a
+					className="text-md font-bold cursor-pointer"
+					onClick={() => {
+						setCartOpen(!cartOpen);
+					}}
+				>
 					Cart ({cartQuantity})
 				</a>
+
+				<MiniCart cart={cart} />
 			</div>
 		</div>
 	);
