@@ -13,7 +13,8 @@ import { CartContext } from "../context/shopContext";
 import { formatter } from "../utils/helper";
 
 export default function MiniCart({ cart }) {
-	const { cartOpen, setCartOpen, checkoutUrl } = useContext(CartContext);
+	const { cartOpen, setCartOpen, checkoutUrl, removeCartItem } =
+		useContext(CartContext);
 
 	let cartTotal = 0;
 	cart.map((item) => {
@@ -127,6 +128,11 @@ export default function MiniCart({ cart }) {
 																<div className="flex">
 																	<button
 																		type="button"
+																		onClick={() =>
+																			removeCartItem(
+																				product.id
+																			)
+																		}
 																		className="font-medium text-gray-500 hover:text-gray-800"
 																	>
 																		Remove
