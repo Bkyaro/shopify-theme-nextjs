@@ -6,7 +6,6 @@ import { CartContext } from "@/context/shopContext";
 export default function ProductForm({ product }) {
 	const { addToCart } = useContext(CartContext);
 
-	console.log("product", product);
 	const allVariantsOptions = product.variants.edges?.map((variant) => {
 		const allOptions = {};
 
@@ -54,8 +53,6 @@ export default function ProductForm({ product }) {
 				setSelectedVariant(item);
 			}
 		});
-
-		console.log("selection", selection);
 	}
 
 	return (

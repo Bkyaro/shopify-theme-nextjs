@@ -14,7 +14,6 @@ import { formatter } from "../utils/helper";
 
 export default function MiniCart({ cart }) {
 	const { cartOpen, setCartOpen, checkoutUrl } = useContext(CartContext);
-	console.log(checkoutUrl);
 
 	let cartTotal = 0;
 	cart.map((item) => {

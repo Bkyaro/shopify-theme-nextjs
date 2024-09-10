@@ -9,21 +9,15 @@ export default function ShopProvider({ children }) {
 	const [checkoutId, setCheckoutId] = useState("");
 	const [checkoutUrl, setCheckoutUrl] = useState("");
 
-	// TODO...
 	useEffect(() => {
 		if (localStorage.getItem("checkout_id")) {
 			const cartObject = JSON.parse(localStorage.getItem("checkout_id"));
 
-			console.log("cartObject", cartObject);
-
-			if (cartObject[0].id) {
+			if (cartObject[0].length > 0) {
 				setCart(cartObject[0]);
-			} else if (cartObject[0].length > 0) {
-				setCart(...[cartObject[0]]);
+				setCheckoutId(cartObject[1].id);
+				setCheckoutUrl(cartObject[1].checkoutUrl);
 			}
-
-			setCheckoutId(cartObject[0].id);
-			setCheckoutUrl(cartObject[0].checkoutUrl);
 		}
 	}, []);
 
@@ -57,6 +51,7 @@ export default function ShopProvider({ children }) {
 			setCart(newCart);
 
 			const newCheckout = await updateCheckout(checkoutId, newCart);
+
 			localStorage.setItem(
 				"checkout_id",
 				JSON.stringify([newCart, newCheckout])
