@@ -11,6 +11,7 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { CartContext } from "../context/shopContext";
 import { formatter } from "../utils/helper";
+import Link from "next/link";
 
 export default function MiniCart({ cart }) {
 	const { cartOpen, setCartOpen, checkoutUrl, removeCartItem } =
@@ -78,32 +79,52 @@ export default function MiniCart({ cart }) {
 														key={product.id}
 														className="flex py-6"
 													>
-														<div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-															<Image
-																alt={
-																	product.title
-																}
-																src={
-																	product.image
-																}
-																layout="fill"
-																objectFit="cover"
-															/>
-														</div>
+														<Link
+															legacyBehavior
+															href={`/products/${product.handle}`}
+														>
+															<div
+																onClick={() => {
+																	setCartOpen(
+																		false
+																	);
+																}}
+																className="cursor-pointer relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200"
+															>
+																<Image
+																	alt={
+																		product.title
+																	}
+																	src={
+																		product.image
+																	}
+																	layout="fill"
+																	objectFit="cover"
+																/>
+															</div>
+														</Link>
 
 														<div className="ml-4 flex flex-1 flex-col">
 															<div>
 																<div className="flex justify-between text-base font-medium text-gray-900">
 																	<h3>
-																		<a
-																			href={
-																				product.href
-																			}
+																		<Link
+																			legacyBehavior
+																			passHref
+																			href={`/products/${product.handle}`}
 																		>
-																			{
-																				product.title
-																			}
-																		</a>
+																			<a
+																				onClick={() => {
+																					setCartOpen(
+																						false
+																					);
+																				}}
+																			>
+																				{
+																					product.title
+																				}
+																			</a>
+																		</Link>
 																	</h3>
 																	<p className="ml-4">
 																		{formatter.format(
@@ -146,7 +167,7 @@ export default function MiniCart({ cart }) {
 										</div>
 									</div>
 								</div>
-								{cart.length > 0 && (
+								{cart.length > 0 ? (
 									<div className="border-t border-gray-200 px-4 py-6 sm:px-6">
 										<div className="flex justify-between text-base font-medium text-gray-900">
 											<p>Subtotal</p>
@@ -181,6 +202,12 @@ export default function MiniCart({ cart }) {
 												</button>
 											</p>
 										</div>
+									</div>
+								) : (
+									<div className="flex justify-center items-center h-full">
+										<p className="text-gray-500">
+											Your cart is empty
+										</p>
 									</div>
 								)}
 							</div>
