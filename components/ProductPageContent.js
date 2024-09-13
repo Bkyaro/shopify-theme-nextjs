@@ -45,10 +45,12 @@ export default function ProductPageContent({ product }) {
 			<p className="py-16 space-y-8 md:space-x-4 lg:sapce-x-8 max-w-3xl w-11/12 mx-auto text-center">
 				{product.description}
 			</p>
-			<RecommendedList
-				current={product.id}
-				products={product.collections.edges[0].node.products.edges}
-			/>
+			{product.collections.edges.length && (
+				<RecommendedList
+					current={product.id}
+					products={product.collections.edges[0].node.products.edges}
+				/>
+			)}
 		</div>
 	);
 }
